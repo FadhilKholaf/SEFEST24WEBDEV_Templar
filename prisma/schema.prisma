@@ -8,15 +8,18 @@ datasource db {
 }
 
 model User {
-  id        String         @id @unique @default(uuid())
-  email     String         @unique
-  password  String?
-  role      Role
-  donor     Donation[]     @relation("donor")
-  recipient Donation[]     @relation("recipient")
-  sender    Message[]      @relation("sender")
-  reciever  Message[]      @relation("reciever")
-  member    Organization[]
+  id               String         @id @unique @default(uuid())
+  email            String         @unique
+  password         String?
+  role             Role           @default(GUEST)
+  request_donation Boolean        @default(false)
+  name             String?        @unique
+  description      String?
+  donor            Donation[]     @relation(name: "donor")
+  recipient        Donation[]     @relation(name: "recipient")
+  sender           Message[]      @relation(name: "sender")
+  member           Organization[] @relation(name: "member")
+  room             Room[]         @relation(name: "room")
 }
 
 model Donation {
@@ -28,15 +31,31 @@ model Donation {
   name              String        @unique
   pickup_coordinate String?
   pickup_status     PickupStatus?
+  tracking          Tracking[]    @relation(name: "tracking")
+}
+
+model Tracking {
+  id          String   @id @unique @default(uuid())
+  donation_id String
+  donation    Donation @relation(name: "tracking", fields: [donation_id], references: [id])
+  description String
+  createdAt   DateTime @default(now())
+}
+
+model Room {
+  id      String    @id @unique @default(uuid())
+  user    User[]    @relation(name: "room")
+  message Message[] @relation(name: "message")
 }
 
 model Message {
-  id          String @id @unique @default(uuid())
-  sender_id   String
-  sender      User   @relation(name: "sender", fields: [sender_id], references: [id])
-  reciever_id String
-  reciever    User   @relation(name: "reciever", fields: [reciever_id], references: [id])
-  content     String
+  id        String   @id @unique @default(uuid())
+  sender_id String
+  sender    User     @relation(name: "sender", fields: [sender_id], references: [id])
+  content   String
+  Room      Room     @relation(name: "message", fields: [room_id], references: [id])
+  room_id   String
+  createdAt DateTime @default(now())
 }
 
 model Organization {
