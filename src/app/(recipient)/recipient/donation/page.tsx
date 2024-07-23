@@ -23,7 +23,6 @@ function debounce(fn: any, delay: number) {
 
 export default function page() {
   const { data: session } = useSession();
-
   const [donationsData, setDonationsData] = useState<
     Prisma.DonationGetPayload<{
       include: {
@@ -64,7 +63,6 @@ export default function page() {
       toast.error('Error applied donation', { id: toastId });
     }
   };
-
   return (
     <main className="flex min-h-screen w-screen flex-col gap-y-8 p-4 pl-[316px]">
       <Breadcrumbs />

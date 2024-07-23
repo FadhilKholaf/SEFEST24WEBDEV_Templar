@@ -4,7 +4,10 @@ const services: string[] = ['Donor', 'Recipient', 'Volunteer'];
 
 export default function About() {
   return (
-    <section className="flex h-screen w-screen flex-col justify-center gap-y-8 px-20">
+    <section
+      id="service"
+      className="flex h-screen w-screen flex-col justify-center gap-y-8 px-20"
+    >
       <h2 className="text-center text-5xl font-bold text-[#475443]">
         Our Service
       </h2>

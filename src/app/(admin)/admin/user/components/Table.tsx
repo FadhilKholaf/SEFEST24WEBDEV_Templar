@@ -5,34 +5,45 @@ import DataTable, { TableColumn } from 'react-data-table-component';
 import { toast } from 'sonner';
 
 import { useEffect, useState } from 'react';
-import { deleteUser } from '@/utils/query/user';
+import { deleteUser } from '@/utils/database/user.query';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-export default function UserTable({ users }: { users: User[] }) {
+export default function Table({ users }: { users: User[] }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   const columns: TableColumn<User>[] = [
     {
       name: 'Id',
-      selector: (row: User) => row.id,
+      selector: (row) => row.id,
       sortable: true
     },
     {
       name: 'Email',
-      selector: (row: User) => row.email,
+      selector: (row) => row.email,
+      sortable: true
+    },
+    {
+      name: 'Name',
+      selector: (row) => row.name!,
       sortable: true
     },
     {
       name: 'Role',
-      selector: (row: User) => row.role,
+      selector: (row) => row.role,
       sortable: true
     },
     {
       name: 'Action',
-      cell: (row: User) => (
-        <div className="flex items-center justify-between gap-2">
+      cell: (row) => (
+        <div className="flex items-center justify-between gap-2 text-nowrap">
+          <Link
+            href={'/admin/user/' + row.id}
+            className="h-fit w-fit rounded-lg bg-blue-500 px-4 py-2 text-[#FFFBF2]"
+          >
+            Details
+          </Link>
           <button
             onClick={() => {
               handleDeleteUser(row.id);
@@ -41,12 +52,6 @@ export default function UserTable({ users }: { users: User[] }) {
           >
             Delete
           </button>
-          <Link
-            href={'/admin/user/' + row.id}
-            className="h-fit w-fit rounded-lg bg-yellow-500 px-4 py-2 text-[#FFFBF2]"
-          >
-            Update
-          </Link>
         </div>
       )
     }

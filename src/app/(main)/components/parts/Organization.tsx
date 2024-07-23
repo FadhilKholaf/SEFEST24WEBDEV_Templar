@@ -12,7 +12,7 @@ export default function Organization() {
   const organizations = data.slice(0, 4);
 
   return (
-    <section className="min-h-screen w-screen px-20">
+    <section id="organization" className="min-h-screen w-screen px-20">
       <div className="flex flex-col gap-y-4">
         <h2 className="text-center text-5xl font-bold text-[#475443]">
           Organization

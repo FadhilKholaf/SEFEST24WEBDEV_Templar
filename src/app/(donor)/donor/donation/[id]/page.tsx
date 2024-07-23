@@ -1,10 +1,11 @@
 'use server';
 
-import { findUser } from '@/utils/database/user.query';
 import React from 'react';
 import Form from './components/Form';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { findDonation } from '@/utils/database/donation.query';
+import TrackingData from './components/parts/Tracking';
 
 export default async function page({ params }: { params: { id: string } }) {
   if (params.id === 'new') {
@@ -16,16 +17,17 @@ export default async function page({ params }: { params: { id: string } }) {
     );
   }
 
-  const user = await findUser({ id: params.id });
+  const donation = await findDonation({ id: params.id });
 
-  if (!user) {
+  if (!donation) {
     return notFound();
   }
 
   return (
     <main className="flex min-h-screen w-screen flex-col gap-y-8 p-4 pl-[316px]">
       <Breadcrumbs />
-      <Form user={user} />
+      <Form donation={donation} />
+      <TrackingData donation_id={params.id} />
     </main>
   );
 }

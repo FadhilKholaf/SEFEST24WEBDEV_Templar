@@ -6,11 +6,8 @@ import Link from 'next/link';
 
 const menus: { href: string; title: string }[] = [
   { href: '/', title: 'Home' },
-  { href: '/admin', title: 'Dashboard' },
-  { href: '/admin/user', title: 'Users' },
-  { href: '/admin/donation', title: 'Donations' },
-  { href: '/admin/user', title: 'Organizations' },
-  { href: '/admin/user', title: 'Events' }
+  { href: '/donor', title: 'Dashboard' },
+  { href: '/donor/donation', title: 'Donations' }
 ];
 
 export default function Sidebar() {
@@ -25,7 +22,7 @@ export default function Sidebar() {
             height={500}
             className="h-10 w-10 rounded-full"
           />
-          <p className="text-2xl font-semibold">Admin Panel</p>
+          <p className="text-2xl font-semibold">Donor Panel</p>
         </div>
         <div className="h-0.5 w-full bg-primary"></div>
         {menus.map((menu, index) => (

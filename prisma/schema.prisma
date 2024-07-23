@@ -26,9 +26,10 @@ model Donation {
   id                String        @id @unique @default(uuid())
   donor_id          String
   donor             User          @relation(name: "donor", fields: [donor_id], references: [id])
-  recipient_id      String
-  recipient         User          @relation(name: "recipient", fields: [recipient_id], references: [id])
+  recipient_id      String?
+  recipient         User?         @relation(name: "recipient", fields: [recipient_id], references: [id])
   name              String        @unique
+  description       String
   pickup_coordinate String?
   pickup_status     PickupStatus?
   tracking          Tracking[]    @relation(name: "tracking")
@@ -60,18 +61,17 @@ model Message {
 
 model Organization {
   id        String  @id @unique @default(uuid())
-  member_id String
-  member    User    @relation(fields: [member_id], references: [id])
   name      String  @unique
-  event     Event[]
+  organizer Event[] @relation(name: "event")
+  user      User[]  @relation(name: "member")
 }
 
 model Event {
-  id              String       @id @unique @default(uuid())
-  organization_id String
-  organization    Organization @relation(fields: [organization_id], references: [id])
-  name            String       @unique
-  date            DateTime     @default(now())
+  id           String       @id @unique @default(uuid())
+  organizer_id String
+  organizer    Organization @relation(name: "event", fields: [organizer_id], references: [id])
+  name         String       @unique
+  date         DateTime     @default(now())
 }
 
 enum Role {
@@ -79,9 +79,11 @@ enum Role {
   DONOR
   RECIPIENT
   VOLUNTEER
+  GUEST
 }
 
 enum PickupStatus {
+  RECIEVED
   CONFIRMED
   REJECTED
 }

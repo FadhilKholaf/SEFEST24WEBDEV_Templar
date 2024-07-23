@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment } from 'react';
 
+const dashboard: string[] = ['donor', 'recipient', 'volunteer'];
+
 export default function Breadcrumbs() {
   const pathname = usePathname();
 
@@ -21,7 +23,9 @@ export default function Breadcrumbs() {
               href={'/' + path.slice(0, index + 1).join('/')}
               className="font-medium"
             >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
+              {dashboard.includes(item)
+                ? 'Dashboard'
+                : item.charAt(0).toUpperCase() + item.slice(1)}
             </Link>
           </Fragment>
         ))}
