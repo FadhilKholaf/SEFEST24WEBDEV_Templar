@@ -42,7 +42,7 @@ export default function Login() {
       setLoading(true);
       const res = await fetch('/api/register', {
         method: 'POST',
-        body: JSON.stringify(formValues)
+        body: JSON.stringify({ isOrganization: true, ...formValues })
       });
 
       const { status, message }: { status: number; message: string } =
@@ -83,31 +83,27 @@ export default function Login() {
                 className="pointer-events-none mb-5 h-[80px] w-[80px]"
               />
             </Link>
-            <H3 className="mb-4 w-full">Daftar ke FeedForward</H3>
+            <H3 className="mb-4 w-full">
+              Daftarkan Organisasimu ke FeedForward
+            </H3>
             <P className="w-full">
-              Mulai perjalanan anda di platform FeedForward! Atau daftar sebagai{' '}
-              <Link
-                href={'/auth/register/organization'}
-                className="underline transition-all duration-300 hover:text-white"
-              >
-                Organisasi
-              </Link>
+              Mulai perjalanan mencari volunteer di platform FeedForward!
             </P>
           </div>
           <div className="mb-10 flex flex-col gap-4">
             <Input
               onChange={handleChange}
               type="text"
-              label="Nama"
+              label="Nama Organisasi"
               name="nama"
-              placeholder="John Doe"
+              placeholder="Indonesia Bebas Lapar"
             />
             <Input
               onChange={handleChange}
               type="email"
               label="Email"
               name="email"
-              placeholder="email@example.com"
+              placeholder="email@example.org"
             />
             <Input
               onChange={handleChange}

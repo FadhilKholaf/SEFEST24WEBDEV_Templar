@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id               String         @id @unique @default(uuid())
-  email            String         @unique
-  password         String?        @db.Text
-  role             Role           @default(GUEST)
-  request_donation Boolean        @default(false)
+  id               String     @id @unique @default(uuid())
+  email            String     @unique
+  password         String?    @db.Text
+  role             Role       @default(GUEST)
+  request_donation Boolean    @default(false)
   name             String
   description      String?
-  donor            Donation[]     @relation(name: "donor")
-  recipient        Donation[]     @relation(name: "recipient")
-  member           Organization[] @relation(name: "member")
+  donor            Donation[] @relation(name: "donor")
+  recipient        Donation[] @relation(name: "recipient")
+  Event            Event?     @relation(fields: [eventId], references: [id])
+  eventId          String?
 }
 
 model Donation {
@@ -36,16 +37,17 @@ model Donation {
 model Tracking {
   id          String   @id @unique @default(uuid())
   donation_id String
-  donation    Donation @relation(name: "tracking", fields: [donation_id], references: [id])
+  donation    Donation @relation(name: "tracking", fields: [donation_id], references: [id], onDelete: Cascade)
   description String
   createdAt   DateTime @default(now())
 }
 
 model Organization {
-  id        String  @id @unique @default(uuid())
-  name      String  @unique
-  organizer Event[] @relation(name: "event")
-  user      User[]  @relation(name: "member")
+  id       String  @id @unique @default(uuid())
+  name     String  @unique
+  email    String  @unique
+  password String
+  events   Event[] @relation(name: "event")
 }
 
 model Event {
@@ -56,6 +58,7 @@ model Event {
   description  String
   date         DateTime     @default(now())
   slug         String
+  volunteers   User[]
 }
 
 enum Role {
