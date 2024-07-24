@@ -86,6 +86,11 @@ export const authOptions: AuthOptions = {
       allowDangerousEmailAccountLinking: false
     })
   ],
+  pages: {
+    signIn: "/auth/login",
+    newUser: "/auth/register",
+    error: "/auth/login",
+  },
   callbacks: {
     async redirect({ url, baseUrl }) {
       const redirectUrl = url.startsWith('/')

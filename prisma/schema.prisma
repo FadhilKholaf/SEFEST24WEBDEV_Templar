@@ -43,10 +43,11 @@ model Tracking {
 }
 
 model Organization {
-  id     String  @id @unique @default(uuid())
-  name   String  @unique
-  email  String  @unique
-  events Event[] @relation(name: "event")
+  id       String  @id @unique @default(uuid())
+  name     String  @unique
+  email    String  @unique
+  password String
+  events   Event[] @relation(name: "event")
 }
 
 model Event {

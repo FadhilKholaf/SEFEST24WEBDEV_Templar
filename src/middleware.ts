@@ -25,6 +25,7 @@ export const config = {
     '/admin/:path*',
     '/donor/:path*',
     '/recipient/:path*',
+    '/organization/:path*',
     '/volunteer/:path*'
   ]
 };

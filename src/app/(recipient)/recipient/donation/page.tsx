@@ -89,13 +89,6 @@ export default function Page() {
               className="flex w-full gap-x-2 rounded-lg border-2 border-white p-2"
               key={index}
             >
-              <Image
-                src="/dummy.jpeg"
-                alt="donation"
-                width={500}
-                height={500}
-                className="w-1/4 rounded-lg object-cover"
-              />
               <div className="grid w-full grid-cols-1 content-between gap-y-4 text-white">
                 <div className="flex flex-col">
                   <h2 className="text-3xl font-semibold">{donation.name}</h2>
@@ -116,7 +109,7 @@ export default function Page() {
                       className="xl:mt-[20px] xl:inline-flex"
                       variant={'inverse'}
                     >
-                      Apply Donation
+                      Apply For Donation
                     </Button>
                   </div>
                 </div>

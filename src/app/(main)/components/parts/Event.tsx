@@ -1,40 +1,12 @@
 import { Link } from '@/app/components/global/button';
 import { H2, H3, P } from '@/app/components/global/text';
-import { Event } from '@prisma/client';
+import { findAllEvent } from '@/utils/database/event.query';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaNoteSticky } from 'react-icons/fa6';
 
-const events: Event[] = [
-  {
-    id: '1',
-    name: 'Indonesia Kenyang 2045',
-    description:
-      'Mewujudkan indonesia bebas dari kelaparan yang melanda selama tahun 2030-2044',
-    date: new Date(),
-    organizer_id: '',
-    slug: 'ass'
-  },
-  {
-    id: '2',
-    name: 'Papua Makan Bersama 2025',
-    description:
-      'Melayani pulau papua untuk ketersediaan makanan. Ikuti event ini dan tunjukan rasa kemanusiaan mu!',
-    date: new Date(),
-    organizer_id: '',
-    slug: 'ass'
-  },
-  {
-    id: '3',
-    name: 'Peduli Palu 2020',
-    description:
-      'Sebuah bencana alam yang melanda daerah sulawesi yang berfokus pada palu. Menyebabkan banyak nya rumah hancur, dan warga yang kelaparan',
-    date: new Date(),
-    organizer_id: '',
-    slug: 'ass'
-  }
-];
+export default async function Events() {
+  const events = (await findAllEvent()).slice(0, 3);
 
-export default function Events() {
   return (
     <section
       id="events"
