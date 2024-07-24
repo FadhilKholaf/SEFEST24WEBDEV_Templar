@@ -4,7 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { nextGetServerSession } from '@/lib/next-auth';
 import Donation from './components/Donation';
 
-export default async function page() {
+export default async function Page() {
   const session = await nextGetServerSession();
 
   if (!session) {

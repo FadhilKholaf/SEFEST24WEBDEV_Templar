@@ -6,7 +6,7 @@ import { findUser } from '@/utils/database/user.query';
 import { notFound } from 'next/navigation';
 import Form from './components/Form';
 
-export default async function page() {
+export default async function Page() {
   const session = await nextGetServerSession();
 
   const user = await findUser({ id: session?.user?.id });

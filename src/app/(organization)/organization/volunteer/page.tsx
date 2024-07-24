@@ -5,7 +5,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { findEventVolunteer } from '@/utils/database/event.query';
 import { useEffect, useState } from 'react';
 
-export default function page() {
+export default function Page() {
   const [volunteers, setVolunteers] = useState<any>([]);
 
   const handleFindAllEvents = async () => {
@@ -17,10 +17,6 @@ export default function page() {
   useEffect(() => {
     handleFindAllEvents();
   }, []);
-
-  useEffect(() => {
-    console.log(volunteers);
-  }, [volunteers]);
 
   return (
     <main className="flex min-h-screen w-screen flex-col gap-y-8 p-4 pl-[316px]">

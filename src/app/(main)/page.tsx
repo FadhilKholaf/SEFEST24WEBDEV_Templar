@@ -5,7 +5,7 @@ import Event from './components/parts/Event';
 import Home from './components/parts/Home';
 import VisiMisi from './components/parts/VisiMisi';
 
-export default function page() {
+export default function Page() {
   return (
     <>
       <main className="flex flex-col gap-y-10 overflow-hidden bg-primary">

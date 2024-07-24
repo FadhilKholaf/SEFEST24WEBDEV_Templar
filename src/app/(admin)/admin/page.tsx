@@ -2,7 +2,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { findAllDonation } from '@/utils/database/donation.query';
 import { findAllUser } from '@/utils/database/user.query';
 
-export default async function page() {
+export default async function Page() {
   const donations = await findAllDonation();
   const users = await findAllUser();
 

@@ -6,7 +6,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { findTracking } from '@/utils/database/tracking.query';
 import Form from './components/Form';
 
-export default async function page({
+export default async function Page({
   params
 }: {
   params: { id: string; track: string };

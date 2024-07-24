@@ -3,7 +3,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { findAllEvent } from '@/utils/database/event.query';
 import { useEffect } from 'react';
 
-export default async function page() {
+export default async function Page() {
   const events = await findAllEvent(
     {
       organizer_id: 'f7d5073d-bcec-4ec4-9d01-f4428fd3aaf3'

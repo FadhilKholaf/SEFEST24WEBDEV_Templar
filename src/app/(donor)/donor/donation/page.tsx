@@ -5,7 +5,7 @@ import React from 'react';
 import Table from './components/Table';
 import { Link } from '@/app/components/global/button';
 
-export default async function page() {
+export default async function Page() {
   const session = await nextGetServerSession();
 
   const donations = await findFilterDonation({ donor_id: session?.user?.id });

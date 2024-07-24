@@ -5,7 +5,7 @@ import Table from './components/Table';
 import { findAllDonation } from '@/utils/database/donation.query';
 import { Link } from '@/app/components/global/button';
 
-export default async function page() {
+export default async function Page() {
   const donations = await findAllDonation();
   return (
     <main className="flex min-h-screen w-screen flex-col gap-y-8 p-4 pl-[316px]">

@@ -3,7 +3,7 @@ import { nextGetServerSession } from '@/lib/next-auth';
 import { findFilterDonation } from '@/utils/database/donation.query';
 import React from 'react';
 
-export default async function page() {
+export default async function Page() {
   const session = await nextGetServerSession();
 
   const availableDonation = await findFilterDonation({
