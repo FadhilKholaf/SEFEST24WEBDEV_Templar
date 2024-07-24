@@ -37,7 +37,9 @@ export default function Page() {
   const handleFindAllDonations = async (where: string) => {
     const donations = await findFilterDonation({
       recipient_id: { equals: null },
-      OR: [{ name: { contains: where } }]
+      OR: where.split(' ').map((q) => ({
+        name: { contains: q, mode: 'insensitive' },
+      }))
     });
     setDonationsData(donations);
   };
