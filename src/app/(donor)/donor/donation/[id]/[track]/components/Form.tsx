@@ -8,6 +8,7 @@ import {
   handleCreateTracking,
   handleUpdateTracking
 } from '@/utils/actions/tracking';
+import { Button } from '@/app/components/global/button';
 
 export default function Form({
   tracking,
@@ -50,22 +51,21 @@ export default function Form({
       className="flex flex-col gap-4"
     >
       <div className="flex flex-col gap-2">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description" className="text-white">
+          Description
+        </label>
         <input
           type="text"
           name="description"
           id="description"
           required
-          className="rounded-lg border-2 border-secondary p-2 focus:border-dark focus:outline-none"
+          className="focus:border-dark rounded-lg border-2 border-white bg-primary p-2 text-white focus:outline-none"
           defaultValue={tracking && tracking.description}
         />
       </div>
-      <button
-        type="submit"
-        className="mt-4 w-fit rounded-lg bg-secondary px-8 py-4 text-[#FFFBF2]"
-      >
+      <Button variant={tracking ? 'warning' : 'success'} type="submit">
         {tracking ? 'Update' : 'Create'}
-      </button>
+      </Button>
     </form>
   );
 }

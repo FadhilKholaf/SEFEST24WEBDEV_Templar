@@ -1,11 +1,11 @@
 'use client';
 
+import { Button, Link } from '@/app/components/global/button';
 import {
   deleteTracking,
   findDonationTracking
 } from '@/utils/database/tracking.query';
 import { Tracking } from '@prisma/client';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -55,13 +55,10 @@ export default function TrackingData({ donation_id }: { donation_id: string }) {
   return (
     <main className="flex h-screen w-full flex-col gap-y-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-center text-5xl font-bold text-[#475443]">
+        <h2 className="text-center text-5xl font-bold text-white">
           Donation Tracking
         </h2>
-        <Link
-          href={`/donor/donation/${donation_id}/new`}
-          className="w-fit rounded-lg bg-secondary px-8 py-4 text-[#FFFBF2]"
-        >
+        <Link variant={'success'} href={`/donor/donation/${donation_id}/new`}>
           New Tracking
         </Link>
       </div>
@@ -70,25 +67,25 @@ export default function TrackingData({ donation_id }: { donation_id: string }) {
           tracking.map((track, index) => (
             <div
               key={index}
-              className="flex w-full flex-col gap-y-2 rounded-lg border-2 border-secondary p-2 text-secondary"
+              className="flex w-full flex-col gap-y-2 rounded-lg border-2 border-white p-2 text-white"
             >
               <p>{track.description}</p>
               <p>{dateFormat(track.createdAt)}</p>
               <div className="flex items-center justify-end gap-2 text-nowrap">
                 <Link
                   href={`/donor/donation/${track.donation_id}/${track.id}`}
-                  className="h-fit w-fit rounded-lg bg-yellow-500 px-4 py-2 text-[#FFFBF2]"
+                  variant={'warning'}
                 >
                   Update
                 </Link>
-                <button
+                <Button
+                  variant={'danger'}
                   onClick={() => {
                     handleDeleteTracking(track.id);
                   }}
-                  className="h-fit w-fit rounded-lg bg-red-500 px-4 py-2 text-[#FFFBF2]"
                 >
                   Delete
-                </button>
+                </Button>
               </div>
             </div>
           ))}

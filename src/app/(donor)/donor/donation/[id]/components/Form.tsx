@@ -237,7 +237,7 @@ export default function Form({
             <option value="RECIEVED">Recieved</option>
           </select>
         </div>
-        <Button type="submit" variant={'success'}>
+        <Button type="submit" variant={donation ? 'warning' : 'success'}>
           {donation ? 'Update' : 'Create'}
         </Button>
       </form>

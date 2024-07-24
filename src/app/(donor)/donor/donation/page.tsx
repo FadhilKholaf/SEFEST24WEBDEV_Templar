@@ -14,9 +14,9 @@ export default async function page() {
     <main className="flex min-h-screen w-screen flex-col gap-y-8 p-4 pl-[316px]">
       <Breadcrumbs />
       <div className="flex items-center justify-between">
-        <h2 className="text-center text-5xl font-bold text-white">Donation</h2>
+        <h2 className="text-center text-5xl font-bold text-white">Donasi</h2>
         <Link variant={'success'} href="/donor/donation/new">
-          New Donation
+          Donasi Baru
         </Link>
       </div>
       <Table donations={donations} />

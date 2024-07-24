@@ -8,7 +8,7 @@ import Link from 'next/link';
 const menus: { href: string; title: string }[] = [
   { href: '/', title: 'Home' },
   { href: '/donor', title: 'Dashboard' },
-  { href: '/donor/donation', title: 'Donations' }
+  { href: '/donor/donation', title: 'Donasi' }
 ];
 
 export default function Sidebar() {

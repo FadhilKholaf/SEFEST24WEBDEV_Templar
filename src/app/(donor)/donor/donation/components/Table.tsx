@@ -1,13 +1,13 @@
 'use client';
 
 import { Prisma } from '@prisma/client';
-import DataTable, { TableColumn } from 'react-data-table-component';
 import { toast } from 'sonner';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { deleteDonation } from '@/utils/database/donation.query';
 import { Button, Link } from '@/app/components/global/button';
+import { H4, P } from '@/app/components/global/text';
 
 export default function Table({
   donations
@@ -21,67 +21,6 @@ export default function Table({
 }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
-  const columns: TableColumn<
-    Prisma.DonationGetPayload<{
-      include: {
-        donor: { select: { email: true } };
-        recipient: { select: { email: true } };
-      };
-    }>
-  >[] = [
-    {
-      name: 'Id',
-      selector: (row) => row.id,
-      sortable: true
-    },
-    {
-      name: 'Name',
-      selector: (row) => row.name,
-      sortable: true
-    },
-    {
-      name: 'Donator',
-      selector: (row) => row.donor.email,
-      sortable: true
-    },
-    {
-      name: 'Recipient',
-      selector: (row) => row.recipient?.email!,
-      sortable: true
-    },
-    {
-      name: 'Pickup Coordinate',
-      selector: (row) => row.pickup_coordinate!,
-      sortable: true
-    },
-    {
-      name: 'Pickup Status',
-      selector: (row) => row.pickup_status!,
-      sortable: true
-    },
-    {
-      name: 'Action',
-      cell: (row) => (
-        <div className="flex items-center justify-between gap-2 text-nowrap">
-          <Link
-            href={'/donor/donation/' + row.id}
-            className="h-fit w-fit rounded-lg bg-blue-500 px-4 py-2 text-[#FFFBF2]"
-          >
-            Details
-          </Link>
-          <button
-            onClick={() => {
-              handleDeleteDonation(row.id);
-            }}
-            className="h-fit w-fit rounded-lg bg-red-500 px-4 py-2 text-[#FFFBF2]"
-          >
-            Delete
-          </button>
-        </div>
-      )
-    }
-  ];
 
   const handleDeleteDonation = async (id: string) => {
     const toastId = toast.loading('Loading');
@@ -105,27 +44,37 @@ export default function Table({
 
   return (
     <div className="flex flex-col gap-y-4">
-      {/* <DataTable
-        columns={columns}
-        data={donations}
-        pagination
-        customStyles={customStyles}
-      /> */}
       {donations &&
         donations.map((donation, index) => (
           <div
             key={index}
             className="flex w-full justify-between gap-4 rounded-lg border border-white p-2 text-white"
           >
-            <div>
-              <p>{donation.name}</p>
-              <p>{donation.description}</p>
-              <p>{donation.pickup_coordinate}</p>
-              <p>Recipient : {donation.recipient?.name}</p>
+            <div className="flex flex-col gap-y-6">
+              <div>
+                <P>Nama</P>
+                <H4>{donation.name}</H4>
+              </div>
+              <div>
+                <P>Deskripsi</P>
+                <H4>{donation.description}</H4>
+              </div>
+              <div>
+                <P>Lokasi Penerimaan</P>
+                <H4>{donation.pickup_coordinate}</H4>
+              </div>
+              <div>
+                <P>Penerima</P>
+                <H4>
+                  {donation.recipient?.name
+                    ? donation.recipient?.name
+                    : 'Belum ada penerima'}
+                </H4>
+              </div>
             </div>
             <div className="flex items-end justify-between gap-2 text-nowrap">
               <Link variant={'info'} href={'/donor/donation/' + donation.id}>
-                Details
+                Detail
               </Link>
               <Button
                 variant={'danger'}
@@ -133,7 +82,7 @@ export default function Table({
                   handleDeleteDonation(donation.id);
                 }}
               >
-                Delete
+                Hapus
               </Button>
             </div>
           </div>
