@@ -11,7 +11,7 @@ export const findAllOrganizations = async () => {
 export const findOrganization = async (
   where: Prisma.OrganizationWhereUniqueInput
 ) => {
-  return await prisma.organization.findMany({
+  return await prisma.organization.findUnique({
     where
   });
 };
@@ -19,10 +19,10 @@ export const findOrganization = async (
 export const createOrganization = async (
   data: Prisma.OrganizationCreateInput
 ) => {
-  return await prisma.user.create({
+  return await prisma.organization.create({
     data: {
       ...data,
-      password: data.password ? await encrypt(data.password) : undefined
+      password: await encrypt(data.password)
     }
   });
 };

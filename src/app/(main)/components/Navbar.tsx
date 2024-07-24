@@ -25,7 +25,7 @@ const menus: Menu[] = [
 ];
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
